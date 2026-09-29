@@ -1,5 +1,6 @@
 // main.cpp
 
+#include "godot_cpp/classes/audio_stream_player2d.hpp"
 #include "godot_cpp/classes/marker2d.hpp"
 #include "godot_cpp/classes/path_follow2d.hpp"
 #include "mob.h"
@@ -29,6 +30,7 @@ void Main::_bind_methods() {
 			"set_mob_scene", "get_mob_scene");
 }
 void Main::new_game() {
+	get_node<AudioStreamPlayer2D>("Music")->play();
 	_score = 0;
 	get_tree()->call_group("mobs", "queue_free");
 
@@ -43,6 +45,8 @@ void Main::new_game() {
 }
 
 void Main::game_over() {
+	get_node<AudioStreamPlayer2D>("Music")->stop();
+	get_node<AudioStreamPlayer2D>("DeathSound")->play();
 	get_node<HUD>("HUD")->show_gameover();
 	get_node<Timer>("MobTimer")->stop();
 	get_node<Timer>("ScoreTimer")->stop();

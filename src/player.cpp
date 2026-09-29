@@ -44,7 +44,7 @@ void Player::_process(double delta) {
 		animated_sprite_2d->set_flip_h(velocity.x < 0);
 	} else if (velocity.y != 0) {
 		animated_sprite_2d->set_animation("up");
-		animated_sprite_2d->set_flip_h(velocity.y > 0);
+		animated_sprite_2d->set_flip_v(velocity.y > 0);
 	}
 	if (velocity.length() > 0) {
 		velocity = velocity.normalized() * speed;
